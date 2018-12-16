@@ -1,11 +1,11 @@
 <?php
 
-namespace common\modules\publications\controllers;
+namespace common\modules\pagesmodule\controllers;
 
 use yii\web\Controller;
 
 /**
- * Default controller for the `publications` module
+ * Default controller for the `pagesmodule` module
  */
 class DefaultController extends Controller
 {

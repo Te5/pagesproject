@@ -11,8 +11,8 @@ return [
         ],
     ],
     'modules' => [ 
-        'publications' => [ 
-            'class' => 'common\modules\publications\Pages', 
+        'pagesmodule' => [ 
+            'class' => 'common\modules\pagesmodule\Pages', 
         ], 
-    ],     
+    ],    
 ];

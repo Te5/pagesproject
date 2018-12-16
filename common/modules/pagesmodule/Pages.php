@@ -1,16 +1,16 @@
 <?php
 
-namespace common\modules\publications;
+namespace common\modules\pagesmodule;
 
 /**
- * publications module definition class
+ * pagesmodule module definition class
  */
 class Pages extends \yii\base\Module
 {
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'common\modules\publications\controllers';
+    public $controllerNamespace = 'common\modules\pagesmodule\controllers';
 
     /**
      * {@inheritdoc}
