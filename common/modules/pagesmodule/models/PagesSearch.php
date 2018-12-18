@@ -18,7 +18,7 @@ class PagesSearch extends Pages
     {
         return [
             [['id', 'status'], 'integer'],
-            [['author', 'slug', 'category', 'headline', 'creation_date', 'updated_on', 'content', 'meta_description', 'meta_keywords'], 'safe'],
+            [['author', 'slug', 'category', 'headline', 'creation_date', 'updated_on', 'content', 'keywords'], 'safe'],
             [['rating'], 'number'],
         ];
     }
@@ -71,8 +71,7 @@ class PagesSearch extends Pages
             ->andFilterWhere(['like', 'category', $this->category])
             ->andFilterWhere(['like', 'headline', $this->headline])
             ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'meta_description', $this->meta_description])
-            ->andFilterWhere(['like', 'meta_keywords', $this->meta_keywords]);
+            ->andFilterWhere(['like', 'keywords', $this->keywords]);
 
         return $dataProvider;
     }

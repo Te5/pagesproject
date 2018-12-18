@@ -39,8 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'rating',
             'status',
             'content:ntext',
-            'meta_description',
-            'meta_keywords',
+            'keywords',
         ],
     ]) ?>
 

@@ -29,7 +29,7 @@ class Categories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'slug', 'cat_name', 'status'], 'required'],
+            [['parent_id', 'cat_name', 'status'], 'required'],
             [['parent_id', 'status'], 'integer'],
             [['slug', 'cat_name'], 'string', 'max' => 255],
         ];
@@ -44,8 +44,13 @@ class Categories extends \yii\db\ActiveRecord
             'id' => 'ID',
             'parent_id' => 'Parent ID',
             'slug' => 'Slug',
-            'cat_name' => 'Cat Name',
+            'cat_name' => 'Category',
             'status' => 'Status',
         ];
+    }
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
     }
 }

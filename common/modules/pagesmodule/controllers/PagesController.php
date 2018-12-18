@@ -8,7 +8,7 @@ use common\modules\pagesmodule\models\PagesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use common\modules\pagesmodule\models\Categories;
 /**
  * PagesController implements the CRUD actions for Pages model.
  */
@@ -65,13 +65,16 @@ class PagesController extends Controller
     public function actionCreate()
     {
         $model = new Pages();
-
+        $categories = new Categories();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+/*        print_r($model->category);
+        print_r($model->getErrors());
+        die();  */      
         return $this->render('create', [
             'model' => $model,
+            'categories' => $categories
         ]);
     }
 

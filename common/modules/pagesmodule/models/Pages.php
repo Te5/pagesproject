@@ -15,10 +15,11 @@ use Yii;
  * @property string $creation_date
  * @property string $updated_on
  * @property double $rating
- * @property int $status
+ * @property int $status 0 - shown, default. 1 - hidden. 3 - for authorized users only. 4 - admin only.
  * @property string $content
- * @property string $meta_description
- * @property string $meta_keywords
+ * @property string $keywords
+ *
+ * @property Categories $category0
  */
 class Pages extends \yii\db\ActiveRecord
 {
@@ -36,13 +37,14 @@ class Pages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['author', 'slug', 'category', 'headline', 'creation_date', 'updated_on', 'content', 'meta_description', 'meta_keywords'], 'required'],
+            [['author', 'category', 'headline', 'content'], 'required'],
             [['creation_date', 'updated_on'], 'safe'],
             [['rating'], 'number'],
             [['status'], 'integer'],
             [['content'], 'string'],
-            [['author', 'slug', 'category', 'headline'], 'string', 'max' => 64],
-            [['meta_description', 'meta_keywords'], 'string', 'max' => 255],
+            [['author', 'slug', 'headline'], 'string', 'max' => 64],
+            [['category', 'keywords'], 'string', 'max' => 255],
+            [['category'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category' => 'cat_name']],
         ];
     }
 
@@ -62,8 +64,15 @@ class Pages extends \yii\db\ActiveRecord
             'rating' => 'Rating',
             'status' => 'Status',
             'content' => 'Content',
-            'meta_description' => 'Meta Description',
-            'meta_keywords' => 'Meta Keywords',
+            'keywords' => 'Keywords',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory0()
+    {
+        return $this->hasOne(Categories::className(), ['cat_name' => 'category']);
     }
 }

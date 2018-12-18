@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'cat_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cat_name')->dropDownList(['a', 'b', 'c']) ?>
 
     <?= $form->field($model, 'status')->textInput() ?>
 
