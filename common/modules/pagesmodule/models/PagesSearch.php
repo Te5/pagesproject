@@ -41,6 +41,7 @@ class PagesSearch extends Pages
      */
     public function search($params)
     {
+        
         $query = Pages::find();
 
         // add conditions that should always apply here
@@ -72,7 +73,13 @@ class PagesSearch extends Pages
             ->andFilterWhere(['like', 'headline', $this->headline])
             ->andFilterWhere(['like', 'content', $this->content])
             ->andFilterWhere(['like', 'keywords', $this->keywords]);
-
+        // здесь выдача результатов фильтруется - если админ - один список, если зарегистрированный пользователь - другой, если гость - третий
+        if(\Yii::$app->user->isGuest) 
+        {
+            $query->andFilterWhere(['not', ['status' => '3']])->andFilterWhere(['not', ['status' => '1']])->andFilterWhere(['not', ['status' => '2']]);            
+        } elseif (\Yii::$app->user->identity->username !== 'admin') {
+            $query->andFilterWhere(['not', ['status' => '3']])->andFilterWhere(['not', ['status' => '1']]);
+        } 
         return $dataProvider;
     }
 }

@@ -35,9 +35,10 @@ class PagesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PagesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $searchModel = new PagesSearch();
+
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -68,10 +69,7 @@ class PagesController extends Controller
         $categories = new Categories();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        }
-/*        print_r($model->category);
-        print_r($model->getErrors());
-        die();  */      
+        }     
         return $this->render('create', [
             'model' => $model,
             'categories' => $categories
@@ -89,12 +87,16 @@ class PagesController extends Controller
     {
         $model = $this->findModel($id);
 
+        $categories = new Categories();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->updated_on = new \yii\db\Expression('NOW()');
+            $model->save(); // сохраняет время обновления как текущее
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'categories' => $categories,
         ]);
     }
 
