@@ -75,4 +75,10 @@ class Pages extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Categories::className(), ['cat_name' => 'category']);
     }
+    // возвращает массив всех хэштегов для дальнейшего использования
+    public function getKeywordsArray($id) 
+    {
+        $keywordintext = explode(', ', $this->findOne(['id' => $id])->keywords);
+        return $keywordintext;
+    }
 }

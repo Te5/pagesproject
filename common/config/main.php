@@ -9,6 +9,17 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+/*        'view' => [
+        'theme' => [
+            'basePath' => '@app/themes/cleanb',
+            'baseUrl' => '@web/themes/cleanb',
+            'pathMap' => [
+                '@app/views' => '@app/themes/cleanb',
+                '@app/modules' => '@app/themes/basic/modules',
+            ],
+        ],
+    ],   */ 
+
     ],
     'modules' => [ 
         'pagesmodule' => [ 

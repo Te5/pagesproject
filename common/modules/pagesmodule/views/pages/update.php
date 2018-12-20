@@ -27,10 +27,6 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $form->field($model, 'headline')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'creation_date')->textInput(['maxlength' => true]) ?>
-
-	<?= $form->field($model, 'updated_on')->textInput(['maxlength' => true]) ?>
-
 	<?= $form->field($model, 'rating')->textInput() ?>
 
 	<?= $form->field($model, 'status')->textInput() ?>

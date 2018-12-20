@@ -35,6 +35,42 @@ class PagesController extends Controller
      */
     public function actionIndex()
     {
+        //Проверка ниже добавляет в решётку grid view корректные контролы - если админ, то можно редактировать, иначе нельзя, также выдача для пользователя и гостя будет меньше
+        if(\Yii::$app->user->isGuest || \Yii::$app->user->identity->username !== 'admin')
+        {
+            $columns = 
+            [
+            ['class' => 'yii\grid\SerialColumn'],    
+
+            'author',
+            'category',
+            'headline',
+            'updated_on',
+            'rating',
+            'keywords',
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
+            ];
+        } else 
+        {
+            $columns = 
+            [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'author',
+            'slug',
+            'category',
+            'headline',
+            'creation_date',
+            'updated_on',
+            'rating',
+            'status',
+            /*'content:ntext',*/ //не нужен
+            'keywords',
+            ['class' => 'yii\grid\ActionColumn'],
+            ];
+        }        
+
 
         $searchModel = new PagesSearch();
 
@@ -42,6 +78,7 @@ class PagesController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'columns' => $columns,
         ]);
     }
 
@@ -53,6 +90,9 @@ class PagesController extends Controller
      */
     public function actionView($id)
     {
+        $model = new Pages();
+        print_r($model->getKeywordsArray($id));
+        die();
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

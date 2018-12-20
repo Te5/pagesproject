@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $model->headline;
     <p>By: <?=Html::encode($model->author) ?></p>
     <?= DetailView::widget([
         'model' => $model,
-        'attributes' => [
+        'attributes' => [    
             'id',
             'author',
             'slug',
